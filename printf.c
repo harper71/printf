@@ -16,7 +16,6 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (-1);
 	while (*format)
-	{
 		if (*format != '%')
 			write(1, format, 1);
 			chara_points++;
@@ -43,7 +42,6 @@ int _printf(const char *format, ...)
 				write(1, format, 1);
 				chara_points++;
 		format++;
-	}
 	va_end(list_1);
 	return (chara_points);
 }
