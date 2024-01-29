@@ -16,44 +16,44 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
-	while (*format)
+	while (*format != '\0')
 	{
 		if (*format != '%')
-		{
-			write(1, format, 1);
-			chara_points++;
-		}
+			write(1, format, 1), chara_points++;
 		else
 		{
 			format++;
 			if (*format == '\0')
-			{
 				break;
-			}
-			if (*format == 'c')
+
+			switch (*format)
 			{
-				char alpha = va_arg(list_1, int);
-
-				write(1, &alpha, 1);
-				chara_points++;
-			}
-			else if (*format == 's')
-			{
-				char *strings = va_arg(list_1, char*);
-
-				int string_len = 0;
-
-				while (strings[string_len] != '\0')
+				case 'c':
 				{
-					string_len++;
+					char alpha = va_arg(list_1, int);
+
+					write(1, &alpha, 1), chara_points++;
+					break;
 				}
-				write(1, strings, string_len);
-				chara_points = string_len;
-			}
-			else if (*format == '%')
-			{
-				write(1, format, 1);
-				chara_points++;
+				case 's':
+				{
+					char *strings = va_arg(list_1, char*);
+
+					int str_len = 0;
+
+					while (strings[str_len] != '\0')
+					{
+						str_len++;
+					}
+					write(1, strings++, 1);
+
+					chara_points = str_len;
+
+					break;
+				}
+				case '%':
+					write(1, format, 1), chara_points++;
+					break;
 			}
 		}
 		format++;
