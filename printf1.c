@@ -39,13 +39,10 @@ int _printf(const char *format, ...)
 				{
 					char *strings = va_arg(list_1, char*);
 
-					int string_len = 0;
-
-					while (strings[string_len] != '\0')
+					while (*strings)
 					{
-						string_len++;
+						write(1, strings++, 1);
 					}
-					write(1, strings, string_len);
 					chara_points++;
 					break;
 				}
