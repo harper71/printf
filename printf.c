@@ -7,41 +7,49 @@
  */
 int _printf(const char *format, ...)
 {
-	va_list list_1;
-
 	int chara_points = 0;
 
-	va_start(list_1, format);
+	va_list list_1;
 
+	va_start(list_1, format);
 	if (format == NULL)
+	{
 		return (-1);
-	while (*format)
+	}
+	while (*format != '\0')
+	{
 		if (*format != '%')
-			write(1, format, 1);
-			chara_points++;
+			write(1, format, 1), chara_points++;
 		else
+		{
 			format++;
 			if (*format == '\0')
 				break;
-			if (*format == 'c')
-				char alpha = va_arg(list_1, int);
 
-				write(1, &alpha, 1);
-				chara_points++;
-			else if (*format == 's')
-				char *strings = va_arg(list_1, char*);
+			switch (*format)
+			{
+				case 'c':
+				{
+					char alpha = va_arg(list_1, int);
 
-				int string_len = 0;
+					write(1, &alpha, 1), chara_points++;
+					break;
+				}
+				case 's':
+				{
+					char *strings = va_arg(list_1, char*);
 
-				while (strings[string_len] != '\0')
-					string_len++;
-				write(1, strings, string_len);
-
-				chara_points = string_len;
-			else if (*format == '%')
-				write(1, format, 1);
-				chara_points++;
+					while (*strings)
+						write(1, strings++, 1), chara_points++;
+					break;
+				}
+				case '%':
+					write(1, format, 1), chara_points++;
+					break;
+			}
+		}
 		format++;
+	}
 	va_end(list_1);
 	return (chara_points);
 }
