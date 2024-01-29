@@ -40,10 +40,7 @@ int _printf(const char *format, ...)
 					char *strings = va_arg(list_1, char*);
 
 					while (*strings)
-					{
-						write(1, strings++, 1);
-					}
-					chara_points++;
+						write(1, strings++, 1), chara_points++;
 					break;
 				}
 				case '%':
