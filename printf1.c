@@ -43,6 +43,19 @@ int _printf(const char *format, ...)
 						write(1, strings++, 1), chara_points++;
 					break;
 				}
+				case 'd':
+				case 'i':
+				{
+					int num = va_arg(list_1, int);
+
+					char buffer[12];
+
+					int length = sprintf(buffer, "%d", num);
+
+					write(1, buffer, length), chara_points += length;
+
+					break;
+				}
 				case '%':
 					write(1, format, 1), chara_points++;
 					break;
