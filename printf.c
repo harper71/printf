@@ -39,8 +39,16 @@ int _printf(const char *format, ...)
 				{
 					char *strings = va_arg(list_1, char*);
 
-					while (*strings)
-						write(1, strings++, 1), chara_points++;
+					int str_len = 0;
+
+					while (strings[str_len] != '\0')
+					{
+						str_len++;
+					}
+					write(1, strings++, 1);
+
+					chara_points = str_len;
+
 					break;
 				}
 				case '%':
