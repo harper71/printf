@@ -56,6 +56,55 @@ int _printf(const char *format, ...)
 
 					break;
 				}
+				case 'u':
+				{
+					unsigned int un_num = va_arg(list_1, unsigned int);
+
+					char buffer[12];
+
+					unsigned int un_length = sprintf(buffer,"%u", un_num);
+
+					write(1, buffer, un_length), chara_points += un_length;
+
+					break;
+				}
+
+				case 'o':
+				{
+					unsigned int unoct_int = va_arg(list_1,unsigned int);
+
+					char buffer[12];
+
+					unsigned int unoct_length = sprintf(buffer, "%o",unoct_int);
+
+					write(1, buffer, unoct_length), chara_points += un_length;
+
+					break;
+				}
+
+				case 'x':
+				{
+					unsigned  int hex_int = va_arg(list_1,unsigned int);
+
+					char buffer[12];
+					
+					unsigned  int hex_length = sprintf(buffer, "%x",hex_int);
+
+					write(1, buffer, hex_length), chara_points += hex_length;
+
+				}
+
+				case 'X':
+				{
+					unsigned int hex_int2 = va_arg(list_1, unsigned int);
+
+					char buffer[12];
+
+					unsigned int hex_length2 = sprintf(buffer, "%X",hex_int);
+
+					write(1, buffer, hex_length2), chara_points += hex_length;
+				}
+
 				case '%':
 					write(1, format, 1), chara_points++;
 					break;
