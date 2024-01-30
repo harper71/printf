@@ -74,7 +74,7 @@ int _printf(const char *format, ...)
 
 					unsigned int unoct_length = sprintf(buffer, "%o", unoct_int);
 
-					write(1, buffer, unoct_length), chara_points += un_length;
+					write(1, buffer, unoct_length), chara_points += unoct_length;
 					break;
 				}
 				case 'x':
@@ -94,9 +94,9 @@ int _printf(const char *format, ...)
 
 					char buffer[12];
 
-					unsigned int hex_length2 = sprintf(buffer, "%X", hex_int);
+					unsigned int hex_length2 = sprintf(buffer, "%X", hex_int2);
 
-					write(1, buffer, hex_length2), chara_points += hex_length;
+					write(1, buffer, hex_length2), chara_points += hex_length2;
 					break;
 				}
 				case '%':
