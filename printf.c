@@ -105,11 +105,11 @@ int _printf(const char *format, ...)
 
 					char buffer[32];
 
-					int pointer_length = sprintf(buffer, "%p", &pointer);
-					
+					int pointer_length = sprintf(buffer, "%p", pointer);
+
 					write(1, buffer, pointer_length), chara_points += pointer_length;
 					break;
-				}	
+				}
 				case '%':
 					write(1, format, 1), chara_points++;
 					break;
