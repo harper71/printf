@@ -7,4 +7,5 @@ int _printf(const char *format, ...);
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #endif

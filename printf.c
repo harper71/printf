@@ -110,33 +110,33 @@ int _printf(const char *format, ...)
 					write(1, buffer, pointer_length), chara_points += pointer_length;
 					break;
 				}
-				case 'b':
+				case 'S':
 				{
-					int i, a[10];
+					char *str = va_arg(list_1, char *);
 
-					int convertNUM = va_arg(list_1, unsigned int);
+					char buffer[1024];
 
-					for (i = 0; convertNUM > 0; i++)
+					int i, length;
+					for (i = 0; str[i] != '\0'; i++)
 					{
-						a[i] = convertNUM % 2;
-
-						convertNUM = convertNUM / 2;
+						if (isprint((unsigned char)str[i]))
+						{
+							buffer[i] = str[i];
+						}
+						else
+						{
+							sprintf(buffer + i, "\\x%02X", (unsigned char)str[i]);
+						}
 					}
 
-					i = i - 1;
+					length = strlen(buffer);
 
-					while (i >= 0)
-					{
-						char buffer[32];
+					write(1, buffer, length);
 
-						int length = sprintf(buffer, "%u", a[i]);
+					chara_points += length;
 
-						write(1, buffer, length);
-						i--;
-					}
-					chara_points++;
 					break;
-					}
+				}
 				case '%':
 					write(1, format, 1), chara_points++;
 					break;
