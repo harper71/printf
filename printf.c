@@ -1,47 +1,49 @@
 #include "main.h"
+
 /**
- * _printf -acts like the printf function in the standard input and output
- * @format: takes a string that needs to be printed
- * @...: a varidic function that takes integers, strings, characters etc
- * Return: chara_points
- */
+* _printf - Acts like the printf function in the standard input and output
+* @format: Takes a string that needs to be printed
+* @...: A varidic function that takes integers, strings, characters etc
+* Return:  chara_points
+*/
+
 int _printf(const char *format, ...)
 {
-	va_list list_1;
+va_list list_1;
+char *chara_points = NULL;
+va_start(list_1, format);
 
-	int chara_points = 0;
+while (*format)
+{
+if (*format == '%' && *(format + 1) != '\0')
+{
+switch (*(format + 1))
+{
+case 'c':
+chara_points = va_arg(list_1, char *);
+write(1, chara_points, 1);
+break;
+case 's':
+chara_points = va_arg(list_1, char *);
+write(1, chara_points, strlen(chara_points));
+break;
+case '%':
+write(1, "%", 1);
+break;
+default:
+write(1, "%", 1);
+write(1, format + 1, 1);
+break;
+}
+format += 2;
+}
+else
+{
+write(1, format, 1);
+format++;
+}
+}
 
-	va_start(list_1, format);
-
-	if (format == NULL)
-		return (-1);
-	while (*format)
-		if (*format != '%')
-			write(1, format, 1);
-			chara_points++;
-		else
-			format++;
-			if (*format == '\0')
-				break;
-			if (*format == 'c')
-				char alpha = va_arg(list_1, int);
-
-				write(1, &alpha, 1);
-				chara_points++;
-			else if (*format == 's')
-				char *strings = va_arg(list_1, char*);
-
-				int string_len = 0;
-
-				while (strings[string_len] != '\0')
-					string_len++;
-				write(1, strings, string_len);
-
-				chara_points = string_len;
-			else if (*format == '%')
-				write(1, format, 1);
-				chara_points++;
-		format++;
-	va_end(list_1);
-	return (chara_points);
+va_end(list_1);
+return (0);
 }

@@ -6,5 +6,5 @@ int _printf(const char *format, ...);
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
-
+#include <string.h>
 #endif
