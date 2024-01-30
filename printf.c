@@ -110,6 +110,33 @@ int _printf(const char *format, ...)
 					write(1, buffer, pointer_length), chara_points += pointer_length;
 					break;
 				}
+				case 'b':
+				{
+					int i, a[10];
+
+					int convertNUM = va_arg(list_1, unsigned int);
+
+					for (i = 0; convertNUM > 0; i++)
+					{
+						a[i] = convertNUM % 2;
+
+						convertNUM = convertNUM / 2;
+					}
+
+					i = i - 1;
+
+					while (i >= 0)
+					{
+						char buffer[32];
+
+						int length = sprintf(buffer, "%u", a[i]);
+
+						write(1, buffer, length);
+						i--;
+					}
+					chara_points++;
+					break;
+					}
 				case '%':
 					write(1, format, 1), chara_points++;
 					break;
