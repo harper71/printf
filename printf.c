@@ -99,6 +99,17 @@ int _printf(const char *format, ...)
 					write(1, buffer, hex_length2), chara_points += hex_length2;
 					break;
 				}
+				case 'p':
+				{
+					void *pointer = va_arg(list_1, void*);
+
+					char buffer[32];
+
+					int pointer_length = sprintf(buffer, "%p", &pointer);
+					
+					write(1, buffer, pointer_length), chara_points += pointer_length;
+					break;
+				}	
 				case '%':
 					write(1, format, 1), chara_points++;
 					break;
